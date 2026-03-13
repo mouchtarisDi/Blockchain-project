@@ -1,3 +1,9 @@
+
+---
+
+# `docs/FILE_RESPONSIBILITIES.md`
+
+```md
 # FILE_RESPONSIBILITIES.md
 
 ## Σκοπός
@@ -22,37 +28,41 @@
 - setup
 - βασικά features
 - πώς τρέχει
+- συνολική δομή project
 
 ---
 
 # DOCS
 
-## ARCHITECTURE.md
+## docs/ARCHITECTURE.md
 Περιγράφει τη συνολική αρχιτεκτονική του project.
 
-## TEAM_RULES.md
+## docs/TEAM_RULES.md
 Περιγράφει κανόνες συνεργασίας και scope.
 
-## GIT_WORKFLOW.md
+## docs/GIT_WORKFLOW.md
 Περιγράφει branches, commits, merge flow.
 
-## FUNCTIONS.md
+## docs/FUNCTIONS.md
 Περιγράφει τις βασικές functions / methods / endpoints.
 
-## API_SPEC.md
+## docs/API_SPEC.md
 Περιγράφει τα endpoints, request bodies και responses του backend.
 
-## FRONTEND_PAGES.md
+## docs/FRONTEND_PAGES.md
 Περιγράφει τις σελίδες και τα βασικά UI στοιχεία του frontend.
 
-## TESTING.md
+## docs/TESTING.md
 Περιγράφει τι tests πρέπει να γίνουν και τι ελέγχουμε.
 
-## PRESENTATION_NOTES.md
+## docs/PRESENTATION_NOTES.md
 Περιγράφει βασικά σημεία που θα παρουσιαστούν στην τελική εργασία.
 
-## FILE_RESPONSIBILITIES.md
+## docs/FILE_RESPONSIBILITIES.md
 Περιγράφει τον ρόλο κάθε αρχείου του project.
+
+## docs/GUIDE.md
+Περιγράφει setup, τοπική εκτέλεση και workflow συνεργασίας.
 
 ---
 
@@ -63,12 +73,16 @@
 - εγκατάσταση
 - dependencies
 - τρόπος εκτέλεσης
+- tests
 
 ## backend/requirements.txt
 Όλα τα Python dependencies του backend.
 
 ## backend/run.py
 Απλό entry point για εύκολη εκκίνηση του backend.
+
+## backend/test_core.py
+Απλό script χειροκίνητου ελέγχου του blockchain flow εκτός API.
 
 ---
 
@@ -80,7 +94,16 @@
 ## backend/app/main.py
 Δημιουργία FastAPI app και σύνδεση routes.
 
-Δεν περιέχει core blockchain logic.
+Περιέχει:
+- app initialization
+- app metadata
+- middleware registration
+- route registration
+
+Δεν περιέχει:
+- core blockchain logic
+- mining implementation
+- balance calculation logic
 
 ---
 
@@ -95,13 +118,16 @@ Package init file.
 Περιέχει:
 - route definitions
 - λήψη request data
-- κλήση service/core logic
+- validation σε επίπεδο endpoint όπου χρειάζεται
+- κλήση service layer
 - response επιστροφή
+- μετατροπή exceptions σε HTTP responses
 
 Δεν περιέχει:
 - proof of work implementation
 - hash generation logic
 - μεγάλα business rules
+- αποθήκευση chain state
 
 ---
 
@@ -139,7 +165,10 @@ Package init file.
 Package init file.
 
 ## backend/app/schemas/transaction_schema.py
-Schema για request/response σχετικό με transactions.
+Schemas για transaction requests/responses:
+- TransactionCreate
+- TransactionData
+- TransactionResponse
 
 ## backend/app/schemas/mine_schema.py
 Schema για mining requests / mining responses.
@@ -151,7 +180,9 @@ Schema για balance responses.
 Schema για block serialization / response μορφή.
 
 ## backend/app/schemas/response_schema.py
-Γενικά response models για σταθερή μορφή απαντήσεων.
+Γενικά response models για:
+- full blockchain response
+- validation response
 
 ---
 
@@ -162,6 +193,15 @@ Package init file.
 
 ## backend/app/services/blockchain_service.py
 Ενδιάμεση πρόσβαση στο blockchain instance.
+
+Περιέχει:
+- create transaction
+- mine block
+- get chain
+- get latest block
+- get balance
+- validate chain
+- get pending transactions
 
 Χρησιμοποιείται ώστε τα routes να μη χειρίζονται απευθείας όλη τη λογική.
 
@@ -207,6 +247,7 @@ Tests για τα API routes.
 - setup
 - install
 - run instructions
+- API connection πληροφορίες
 
 ## frontend/package.json
 Dependencies και scripts του frontend.
@@ -232,7 +273,11 @@ Dependencies και scripts του frontend.
 Frontend entry point.
 
 ## frontend/src/App.tsx
-Κεντρικό component / routing / layout setup.
+Κεντρικό component.
+Συνήθως περιέχει:
+- routing setup
+- layout mounting
+- global providers
 
 ## frontend/src/index.css
 Βασικά global styles.
@@ -243,88 +288,89 @@ Frontend entry point.
 
 ## frontend/src/pages/Dashboard.tsx
 Κεντρική εικόνα του blockchain:
-- blocks
-- overview
-- κατάσταση chain
+- latest block
+- chain overview
+- validation status
+- βασικά στατιστικά
 
 ## frontend/src/pages/Transactions.tsx
 Σελίδα συναλλαγών:
 - form δημιουργίας
-- pending transactions list
+- success / error handling
+- πιθανή προβολή pending transactions
 
 ## frontend/src/pages/Mine.tsx
 Σελίδα mining:
-- mine button
-- αποτέλεσμα mining
-- miner input αν χρειάζεται
+- miner input
+- mine action
+- εμφάνιση αποτελέσματος mining
 
 ## frontend/src/pages/Balances.tsx
-Σελίδα ελέγχου balance wallet.
+Σελίδα αναζήτησης balance με βάση address.
+
+## frontend/src/pages/Chain.tsx
+Σελίδα προβολής όλου του blockchain.
 
 ---
 
 # FRONTEND / COMPONENTS
 
 ## frontend/src/components/Layout.tsx
-Κοινό layout σελίδων.
+Κοινό layout wrapper όλων των σελίδων.
 
 ## frontend/src/components/Navbar.tsx
-Πλοήγηση μεταξύ σελίδων.
-
-## frontend/src/components/BlockCard.tsx
-Εμφάνιση ενός block.
+Πλοήγηση μεταξύ των frontend pages.
 
 ## frontend/src/components/TransactionForm.tsx
-Form για νέα συναλλαγή.
-
-## frontend/src/components/PendingTransactions.tsx
-Εμφάνιση pending transactions.
+Φόρμα δημιουργίας συναλλαγής.
 
 ## frontend/src/components/MinePanel.tsx
-UI για mining action και αποτέλεσμα.
+UI component για mining action.
 
 ## frontend/src/components/BalanceCard.tsx
-Εμφάνιση balance wallet.
+Προβολή υπολοίπου συγκεκριμένου address.
+
+## frontend/src/components/BlockCard.tsx
+Οπτικοποίηση ενός block και των βασικών του στοιχείων.
+
+## frontend/src/components/PendingTransactions.tsx
+Προβολή συναλλαγών που περιμένουν να γίνουν mined.
 
 ---
 
 # FRONTEND / SERVICES
 
 ## frontend/src/services/api.ts
-Όλες οι κλήσεις προς το FastAPI backend.
+Όλες οι HTTP κλήσεις προς το backend API.
 
-Δεν περιέχει UI code.
+Περιέχει functions όπως:
+- getChain
+- getLatestBlock
+- createTransaction
+- mineBlock
+- getBalance
+- validateChain
+- getPendingTransactions
+
+Δεν περιέχει UI rendering.
 
 ---
 
 # FRONTEND / TYPES
 
 ## frontend/src/types/blockchain.ts
-TypeScript types/interfaces για:
-- Block
-- Transaction
-- Balance response
-- API response structures
+TypeScript interfaces / types για:
+- block
+- transaction
+- API responses
 
 ---
 
 # FRONTEND / UTILS
 
 ## frontend/src/utils/format.ts
-Μικρές βοηθητικές functions μορφοποίησης:
-- dates
-- hash preview
-- numbers
-
-Δεν περιέχει business logic.
-
----
-
-# GITHUB
-
-## .github/PULL_REQUEST_TEMPLATE.md
-Template για pull request περιγραφή:
-- τι άλλαξε
-- ποια αρχεία επηρεάζει
-- τι δοκιμάστηκε
-- τι πρέπει να ελεγχθεί
+Βοηθητικές συναρτήσεις μορφοποίησης:
+- timestamps
+- hashes
+- ποσά
+- labels

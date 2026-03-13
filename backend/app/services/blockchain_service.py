@@ -56,6 +56,15 @@ def get_chain() -> list[dict]:
     """
     return [block.to_dict() for block in blockchain.chain]
 
+def get_pending_transactions() -> list[dict]:
+    """
+    Επιστρέφει όλες τις pending transactions σε serializable μορφή.
+
+    Returns:
+        list[dict]: Λίστα από pending transactions.
+    """
+    return [transaction.to_dict() for transaction in blockchain.pending_transactions]
+
 
 def get_balance(address: str) -> float:
     """

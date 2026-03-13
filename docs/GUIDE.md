@@ -149,3 +149,34 @@ Educational blockchain backend implementation including:
 - chain validation
 - REST API
 - automated tests
+
+---
+
+# Frontend Setup
+
+## 1
+Σε νέο terminal:
+cd frontend
+npm install
+npm run dev
+
+--Fronend URL
+http://localhost:5173
+--Backend URL
+http://127.0.0.1:8000
+
+---
+
+## Full Local Run
+
+### Terminal 1 - Backend
+cd backend
+venv\Scripts\activate
+uvicorn app.main:app --reload
+
+### Terminal 2 – Frontend
+Terminal 2 – Frontend
+
+### Git workflow
+Ελεγξε το βήμα 5 απο Backend
+

@@ -1,27 +1,75 @@
 # MEMBER_TASKS.md
 
-## Member 1
+## Member 1 – Core Blockchain Developer
+Αναλαμβάνει τον βασικό μηχανισμό του blockchain.
+
+Υπευθυνότητες:
 - Block class
 - Transaction class
 - Blockchain class
-- Hashing
-- Proof of work
-- Mining
-- Validation
-- Balance logic
-- Core tests
+- SHA256 hashing
+- Proof of Work
+- Mining mechanism
+- Chain validation
+- Balance calculation
+- Overspending protection
+- Core unit tests
 
-## Member 2
+Δεν αναλαμβάνει:
+- HTTP routes
+- FastAPI schemas
+- frontend UI
+
+---
+
+## Member 2 – Backend / API Developer
+Αναλαμβάνει το REST API που εκθέτει τη λογική του blockchain.
+
+Υπευθυνότητες:
 - FastAPI app setup
-- Routes
-- Schemas
+- Route definitions
+- Pydantic schemas
 - Service layer
-- Route tests
 - API documentation
+- Route tests
+- Error handling
+- CORS configuration
+- Σύνδεση backend με frontend requirements
 
-## Member 3
-- React app structure
-- Pages
-- Components
-- API integration από frontend
-- Frontend display logic
+Δεν ξαναγράφει:
+- core blockchain logic
+- frontend logic
+
+---
+
+## Member 3 – Frontend Developer
+Αναλαμβάνει την υλοποίηση του UI και τη σύνδεσή του με το backend.
+
+Υπευθυνότητες:
+- React + TypeScript + Vite setup
+- Routing και layout
+- Υλοποίηση pages:
+  - Dashboard
+  - Transactions
+  - Mine
+  - Balances
+  - Chain Explorer
+- Υλοποίηση reusable components:
+  - Navbar
+  - Layout
+  - TransactionForm
+  - MinePanel
+  - BalanceCard
+  - BlockCard
+  - PendingTransactions
+- API integration με FastAPI backend
+- TypeScript types based on backend schemas
+- Loading / success / error states
+- Οπτικοποίηση blockchain δεδομένων
+- Basic frontend validation
+- Responsive και καθαρό UI για την παρουσίαση
+
+Δεν αναλαμβάνει:
+- proof of work logic
+- blockchain validation logic
+- backend business rules

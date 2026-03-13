@@ -4,7 +4,7 @@ from app.schemas.balance_schema import BalanceResponse
 from app.schemas.block_schema import BlockResponse
 from app.schemas.mine_schema import MineRequest, MineResponse
 from app.schemas.response_schema import BlockchainResponse, ValidationResponse
-from app.schemas.transaction_schema import TransactionCreate, TransactionResponse
+from app.schemas.transaction_schema import TransactionCreate, TransactionResponse, TransactionData
 from app.services import blockchain_service
 
 
