@@ -65,7 +65,6 @@ def get_pending_transactions() -> list[dict]:
     """
     return [transaction.to_dict() for transaction in blockchain.pending_transactions]
 
-
 def get_balance(address: str) -> float:
     """
     Υπολογίζει το confirmed balance ενός address.

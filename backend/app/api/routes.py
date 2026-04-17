@@ -88,6 +88,13 @@ def get_blockchain() -> BlockchainResponse:
         chain=chain,
     )
 
+@router.get("/pending-transactions", response_model=list[TransactionData])
+def get_pending_transactions() -> list[TransactionData]:
+    """
+    Επιστρέφει όλες τις pending transactions που δεν έχουν γίνει ακόμα mined.
+    """
+    return blockchain_service.get_pending_transactions()
+
 
 @router.get("/balance/{address}", response_model=BalanceResponse)
 def get_balance(address: str) -> BalanceResponse:
